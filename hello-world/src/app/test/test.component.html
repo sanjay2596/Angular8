@@ -1,10 +1,12 @@
-<h1>Welcome Mr {{name}}</h1>
+<h1 [class]="successClass">Welcome Mr {{name}}</h1>
 <h2>{{2+2}}</h2>
 <p>{{ "test " + "works!"}}</p>
 <p>{{name.length}}</p>
-<p>{{name.toUpperCase()}}</p>
-<p>{{greetUser()}}</p>
-<p>{{siteUrl}}</p>
+<p class="text-success">{{name.toUpperCase()}}</p>
+<p class="text-warning">{{greetUser()}}</p>
+<p class="text-info">{{siteUrl}}</p>
+<h2 [ngClass]="messageClasses">This is bind multiple classes</h2>
 
-<input type="text" [id]="myId" name="name" value="Shaharif">
-<input type="text" name="name" [disabled]="isDisabled" id={{myId}} value="Shaharif">
+<h4 [class.text-warning]="hasError">Tesing Error Message</h4>
+<input type=" text " [id]="myId " name="name " value="Shaharif ">
+<input type="text " name="name " [disabled]="isDisabled " id={{myId}} value="Shaharif">
