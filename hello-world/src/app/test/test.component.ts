@@ -28,13 +28,14 @@ export class TestComponent implements OnInit {
   public isDisabled ="true"
   public siteUrl =window.location.href;
   public successClass= "text-success";
-  public hasError =true;
+  public hasError =false;
   public isSpecial = true;
   public messageClasses = {
       "text-success": !this.hasError,
       "text-warning": this.hasError,
       "text-special": this.isSpecial
   }
+  public highlightcolor = "orange"
   constructor() { }
 
   ngOnInit() {
