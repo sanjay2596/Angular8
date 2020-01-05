@@ -24,30 +24,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TestComponent implements OnInit {
   public name ="Arif";
-  public myId ="myTestId";
-  public isDisabled ="true"
-  public siteUrl =window.location.href;
-  public successClass= "text-success";
-  public hasError =false;
-  public isSpecial = true;
-  public messageClasses = {
-      "text-success": !this.hasError,
-      "text-warning": this.hasError,
-      "text-special": this.isSpecial
-  }
-  public greeting ="";
-  public highlightcolor = "orange"
+ 
   constructor() { }
 
   ngOnInit() {
   }
 
-  greetUser(){
-    return "Hello" + this.name;
-  }
-  onbtnClick(event){
-    console.log(event);
-    this.greeting = 'Welcome Dude, This happened by click event';
+ 
+  logMessage(value){
+    console.log(value);
+   
   }
 
 }
