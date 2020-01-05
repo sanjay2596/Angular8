@@ -35,6 +35,7 @@ export class TestComponent implements OnInit {
       "text-warning": this.hasError,
       "text-special": this.isSpecial
   }
+  public greeting ="";
   public highlightcolor = "orange"
   constructor() { }
 
@@ -43,6 +44,10 @@ export class TestComponent implements OnInit {
 
   greetUser(){
     return "Hello" + this.name;
+  }
+  onbtnClick(event){
+    console.log(event);
+    this.greeting = 'Welcome Dude, This happened by click event';
   }
 
 }
