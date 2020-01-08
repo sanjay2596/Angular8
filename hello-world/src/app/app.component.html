@@ -2,7 +2,23 @@
     <div>
         <h1>Main Component {{title}}</h1>
         <div>
-            <input type="text" [(ngModel)]="name"> {{name}}
+            <input type="text" [(ngModel)]="name">
+
+            <!-- One Way -->
+            <!-- <h2 *ngIf="displayHeading; else elseBlock">{{name}}</h2>
+            <ng-template #elseBlock>
+                <h2>Name is hidden coz of ng if and its comming to else part</h2>
+            </ng-template> -->
+            <div *ngIf="displayHeading; then thenBlock; else elseBlock"></div>
+
+            <ng-template #thenBlock>
+                <h2>If Block Arif Shah</h2>
+            </ng-template>
+            <ng-template #elseBlock>
+                <h2>Else Block Shah Sahab</h2>
+            </ng-template>
+
+
         </div>
     </div>
 
