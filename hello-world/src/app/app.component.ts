@@ -7,8 +7,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'hello Arif shah';
-  displayHeading = false;
+  public color="orange";
   constructor(){}
   ngOnInit(){
 
