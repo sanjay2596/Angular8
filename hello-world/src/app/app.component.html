@@ -1,5 +1,6 @@
 <div style="text-align: center;">
     <div>
-        <app-test [parentData]="colors"></app-test>
+        <h2>{{message}}</h2>
+        <app-test (childEvent)="message=$event" [parentData]="colors"></app-test>
     </div>
 </div>

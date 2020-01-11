@@ -8,6 +8,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   public colors= ["orange","red","green","blue","pink"];
+  public message ="";
   constructor(){}
   ngOnInit(){
 
