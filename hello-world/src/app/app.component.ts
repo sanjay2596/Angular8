@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  public color="orange";
+  public colors= ["orange","red","green","blue","pink"];
   constructor(){}
   ngOnInit(){
 
