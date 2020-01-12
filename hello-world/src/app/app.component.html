@@ -1,6 +1,58 @@
 <div style="text-align: center;">
     <div>
-        <h2>{{message}}</h2>
-        <app-test (childEvent)="message=$event" [parentData]="colors"></app-test>
+        <!-- String Pipes -->
+        <h2> String Pipes</h2>
+        <h4>{{message }}</h4>
+        <h4>{{message | uppercase }}</h4>
+        <h4>{{message | lowercase }}</h4>
+        <h4>{{message | titlecase }}</h4>
+        <h4>{{message | slice:2 }}</h4>
+        <h4>{{message | slice:2:8 }}</h4>
+        <h4>{{colors | json}}</h4>
+
+
+        <!-- number Pipers -->
+        <hr>
+        <h2> Number Pipes</h2>
+        <h4>{{amount}}</h4>
+        <h4>{{amount | number:'1.1-2'}}</h4>
+        <h4>{{amount | number:'3.4-5'}}</h4>
+        <h4>{{amount | number:'3.1-2'}}</h4>
+
+
+        <!-- Percentage -->
+        <hr>
+        <h2> Percentage</h2>
+
+        <h4>{{ 0.25 | percent}}</h4>
+
+        <!-- Currency -->
+        <hr>
+        <h2> Currency</h2>
+        <h4>{{ 1786 | currency}}</h4>
+        <h4>{{ 1786 | currency:'USD'}}</h4>
+        <h4>{{ 1786 | currency:'INR'}}</h4>
+        <h4>{{ 1786 | currency:'INR':'code'}}</h4>
+
+        <!-- Date -->
+        <hr>
+        <h2> Date</h2>
+        <h4>{{date}}</h4>
+        <h4>{{date | date:'short'}}</h4>
+        <h4>{{date | date:'shortDate'}}</h4>
+        <h4>{{date | date:'shortTime'}}</h4>
+        <hr>
+        <h4>{{date | date:'medium'}}</h4>
+        <h4>{{date | date:'mediumDate'}}</h4>
+        <h4>{{date | date:'mediumTime'}}</h4>
+        <hr>
+        <h4>{{date | date:'long'}}</h4>
+        <h4>{{date | date:'longDate'}}</h4>
+        <h4>{{date | date:'longTime'}}</h4>
+
+
+
+
+
     </div>
 </div>

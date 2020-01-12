@@ -7,8 +7,16 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  public colors= ["orange","red","green","blue","pink"];
-  public message ="";
+  public colors= {
+    "color1":"orange",
+    "color2":"red",
+    "color3":"green",
+    "color4":"blue",
+    "color5":"pink"
+  };
+  public amount = 5.678;
+  public date = new Date();
+  public message ="Hello world of PROGRAMMERS";
   constructor(){}
   ngOnInit(){
 
