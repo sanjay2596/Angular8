@@ -9,7 +9,7 @@ import { EmployeeService } from '../employee.service';
 export class EmployeeComponent implements OnInit {
 
   public employees = [];
-
+  public errorMessage = "";
 
   constructor(private _employeeService:EmployeeService) { }
 
