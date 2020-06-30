@@ -1,30 +1,37 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {FormsModule} from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { TestComponent } from './test/test.component';
-import { EmployeeComponent } from './employee/employee.component';
-import { EmployeeListComponent } from './employee-list/employee-list.component';
-import { EmployeeService } from './employee.service';
-import { HttpClientModule} from '@angular/common/http';
 
-
+import { LoginComponent } from './login/login.component';
+import { CommentsComponent } from './components/comments/comments.component';
+import { AppLayoutComponent } from './layout/app-layout/app-layout.component';
+import { HeaderComponent } from './layout/header/header.component';
+import { NavbarComponent } from './layout/navbar/navbar.component';
+import { FooterComponent } from './layout/footer/footer.component';
+import { BlogInnerComponent } from './components/blog-inner/blog-inner.component';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TestComponent,
-    EmployeeComponent,
-    EmployeeListComponent,
-   
+    LoginComponent,
+    CommentsComponent,
+    AppLayoutComponent,
+    HeaderComponent,
+    NavbarComponent,
+    FooterComponent,
+    BlogInnerComponent,
   ],
   imports: [
     BrowserModule,
-    FormsModule,
-    HttpClientModule
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule
   ],
-  providers: [EmployeeService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

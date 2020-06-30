@@ -1,0 +1,30 @@
+<p>main layout</p>
+
+<div class="row m-0">
+    <div class="header m-0">
+      <app-header></app-header>
+    </div>
+    <!-- <div class="m-0">
+      <app-navbar [ngClass]="{'side-nav': true, 'display-none': !showNav}"></app-navbar>
+    </div> -->
+    <div class="content m-0 p-0 container-fluid">
+        <div class="row blogs">
+            <div class="col-md-12 m-3 text-center bg-info" *ngFor="let blog of blogs">
+                <h3 [routerLink]="['/blog',blog.id]">{{blog.heading}}</h3>
+            </div>
+            <!-- <div class="col-md-12 m-3 text-center bg-info">
+                <h3 [routerLink]="['/blog/1']">Blog 1</h3>
+            </div>
+            <div class="col-md-12 m-3 text-center bg-success">
+                <h3 [routerLink]="['/blog/2']">Blog 2</h3>
+            </div>
+            <div class="col-md-12 m-3 text-center bg-warning">
+                <h3 [routerLink]="['/blog/3']">Blog 3</h3>
+            </div> -->
+        </div>
+      <!-- <router-outlet></router-outlet> -->
+    </div>
+</div>
+<div class="m-0">
+    <app-footer></app-footer>
+</div>
