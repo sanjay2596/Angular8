@@ -1,0 +1,18 @@
+<div class="container">
+    <h1 class="text-center">Add Blog</h1>
+    <form>
+        <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" name="title" class="form-control" placeholder="Add Title" #title>
+        </div>
+        <div class="form-group">
+            <label for="content">Content</label>
+            <input type="text" name="content" class="form-control" placeholder="Add Content" #content>
+        </div>
+        <div class="form-group">
+            <label for="Author">Author</label>
+            <input type="text" name="author" class="form-control" placeholder="Author Name" #author>
+        </div>
+        <button type="button" (click)="addBlog(title,content, author)" class="btn btn-primary">Submit</button>
+    </form>
+</div>
