@@ -13,6 +13,9 @@ import { NavbarComponent } from './layout/navbar/navbar.component';
 import { FooterComponent } from './layout/footer/footer.component';
 import { BlogInnerComponent } from './components/blog-inner/blog-inner.component';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { HomeComponent } from './home/home.component';
+import { AddBlogComponent } from './add-blog/add-blog.component';
+import { BlogViewComponent } from './blog-view/blog-view.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +27,9 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
     NavbarComponent,
     FooterComponent,
     BlogInnerComponent,
+    HomeComponent,
+    AddBlogComponent,
+    BlogViewComponent
   ],
   imports: [
     BrowserModule,
