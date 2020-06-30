@@ -1,0 +1,34 @@
+<div class="p-3 my-2 border-black" style="border:1px solid black">
+    <div class="row">
+        <h5 class="col-md-1"><b>{{comment.username}}:&nbsp;</b></h5>
+        <p class="col-md-5">{{comment.text}}</p> 
+        <p class="col-md-3 text-center">{{comment.time}}</p> 
+        <p class="col-md-1"><a href="#" (click)="addReply()">Reply</a></p>
+        <p class="col-md-1"><a href="#" (click)="deleteComment(comment)">Delete</a></p>
+        <p class="col-md-1"><a href="#" (click)="toggleEdit()">Edit</a></p>
+
+    </div>
+    <div class="add-reply" *ngIf="isEditComment">
+        <textarea [(ngModel)]='editedComment' rows="5" cols="100"></textarea>
+        <div>
+            <button class="btn btn-success" (click)="editComment()">Edit</button> 
+            <button class="btn btn-danger ml-3" (click)="isEditComment = !isEditComment">Cancel</button> 
+        </div>
+    </div>
+    <div class="add-reply" *ngIf="getReply">
+        <textarea [(ngModel)]='commentReply' rows="5" cols="100"></textarea>
+        <div>
+            <button class="btn btn-success" (click)="replyToComment()">Reply</button> 
+            <button class="btn btn-danger ml-3" (click)="getReply = !getReply">Cancel</button> 
+        </div>
+    </div>
+    <div class="p-3 my-2 replies" style="border:1px solid black" *ngIf="comment.replies.length != 0">
+        <h3>Replies</h3>
+        <div *ngFor="let reply of comment.replies">
+            <div class="row">
+                <h5 class="col-md-1"><b>{{reply.username}}:&nbsp;</b></h5>
+                <p class="col-md-9">{{reply.text}}</p>
+            </div>
+        </div>
+    </div>
+</div>

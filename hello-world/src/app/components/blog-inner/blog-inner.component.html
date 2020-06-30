@@ -1,0 +1,28 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <h1>{{blogContent.heading}}</h1>
+        </div>
+        <div class="col-md-8 offset-md-2">
+            <p>{{blogContent.content}}</p>
+            <p>{{blogContent.content}}</p>
+                <p>{{blogContent.content}}</p>
+        </div>
+        <div class="col-md-8 offset-md-2 mt-5 col-sm-12">
+            <h2>Comments</h2>
+            <div class="comments" style="height: 400px;">
+                <div *ngFor = "let comment of blogContent.comments">
+                    <app-comments [comment]="comment"></app-comments>
+                </div>
+            </div>
+            <div class="add-comment mt-5">
+                <h4>Add a comment</h4>
+                <div class="">
+                    <textarea [(ngModel)]='blogComment' rows="5" cols="100"></textarea>
+                </div>
+                <button class="btn btn-success" (click)="addComment()">Submit</button>
+            </div>
+        </div>
+    </div>
+
+</div>
