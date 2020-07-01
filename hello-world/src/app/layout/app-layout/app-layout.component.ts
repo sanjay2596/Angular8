@@ -21,10 +21,10 @@ export class AppLayoutComponent implements OnInit {
   ngOnInit(): void {
 
     // this.getCurrentBlogDetails();
-    this.blogService.getAll().subscribe(data => {
-      console.log(data);
-      this.blogs = data;
-    });
+    // this.blogService.getAll().subscribe(data => {
+    //   console.log(data);
+    //   this.blogs = data;
+    // });
   }
 
 }

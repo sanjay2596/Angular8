@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { BlogService } from '../services/blog.service';
 
 @Component({
   selector: 'app-home',
@@ -8,19 +9,24 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
 
-  constructor( private router: Router )  { }
+  constructor( private blogService: BlogService )  { }
   blogs = []
   ngOnInit() {
-    this.blogs = JSON.parse(localStorage.getItem("blogs"))
+    this.getAllBlogs()
+    this.blogService.getById(2).subscribe(data => console.log(data));
+    
+  }
+  getAllBlogs() {
+    this.blogService.getAllBlogs().subscribe(data => this.blogs = data)
   }
   removeBlog(blog){
-    let index = this.blogs.indexOf(blog)
-    this.blogs.splice(index, 1)
-    localStorage.setItem("blogs", JSON.stringify(this.blogs))
+    // let index = this.blogs.indexOf(blog)
+    // this.blogs.splice(index, 1)
+    // localStorage.setItem("blogs", JSON.stringify(this.blogs))
+    this.blogService.removeBlog(blog)
     alert("blog has been Deleted")
+    this.getAllBlogs()
+
   }
 
-  onSelect(blog){
-     this.router.navigate(['/',blog.id]);
-  }
 }

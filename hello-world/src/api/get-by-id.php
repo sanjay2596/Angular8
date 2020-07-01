@@ -6,9 +6,10 @@ header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Ac
  * Returns the list of blogs.
  */
 require 'db.php';
-    
+$id = explode("=",$_SERVER['QUERY_STRING'])[1];
+
 $blogs = [];
-$sql = "SELECT id, content, heading FROM blogs";
+$sql = "SELECT id,content, heading FROM blogs WHERE id=".$id;
 
 if($result = mysqli_query($con,$sql))
 {
@@ -27,7 +28,7 @@ else
 {
   http_response_code(404);
 }
-
-//  echo 'reached';
+// $actual_link = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+//   echo $id;
 
 ?>
