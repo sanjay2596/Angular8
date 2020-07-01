@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { BlogService } from '../services/blog.service';
+import { Route } from '@angular/compiler/src/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-blog',
@@ -6,22 +9,24 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./add-blog.component.css']
 })
 export class AddBlogComponent implements OnInit {
-
-  constructor() { }
+  public title:string = '';
+  public content:string = '';
+  public author:string = '';
+  constructor(
+    private blogService: BlogService,
+    private router: Router,
+    // private route: Route
+  ) { }
   blogs = [];
 
   ngOnInit() {
+
   }
    
-  addBlog(title, content, author){
-    let blog = { title: title.value, content: content.value, author : author.value  , id : Math.floor(Math.random() * (100 - 10 + 1) ) + 10, date: new Date()}
-    if(localStorage.getItem("blogs")){
-      this.blogs = JSON.parse(localStorage.getItem("blogs"))
+  addBlog(){
+    if(this.title && this.content && this.author != '') {
+      this.blogService.addBlog(this.title,this.content,this.author)
+      this.router.navigateByUrl('');
     }
-    this.blogs.push(blog)
-    localStorage.setItem("blogs", JSON.stringify(this.blogs))
-    title.value=""
-    content.value=""
-    author.value=""
   }
 }

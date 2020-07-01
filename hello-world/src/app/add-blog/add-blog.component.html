@@ -3,16 +3,17 @@
     <form>
         <div class="form-group">
             <label for="title">Title</label>
-            <input type="text" name="title" class="form-control" placeholder="Add Title" #title>
+            <input type="text" name="title" class="form-control" placeholder="Add Title"  [(ngModel)]="title">
         </div>
         <div class="form-group">
             <label for="content">Content</label>
-            <input type="text" name="content" class="form-control" placeholder="Add Content" #content>
+            <!-- <input type="text" name="content" class="form-control" placeholder="Add Content" #content> -->
+            <textarea name="content" class="form-control" rows="15" cols="100" [(ngModel)]="content"></textarea>
         </div>
         <div class="form-group">
             <label for="Author">Author</label>
-            <input type="text" name="author" class="form-control" placeholder="Author Name" #author>
+            <input type="text" name="author" class="form-control" placeholder="Author Name"  [(ngModel)]="author">
         </div>
-        <button type="button" (click)="addBlog(title,content, author)" class="btn btn-primary">Submit</button>
+        <button type="button" (click)="addBlog()" class="btn btn-primary"  >Submit</button>
     </form>
 </div>
