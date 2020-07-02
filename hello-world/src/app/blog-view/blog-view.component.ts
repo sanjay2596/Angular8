@@ -22,17 +22,23 @@ export class BlogViewComponent implements OnInit {
   }
 
   getBlogById (){
-   this.blogService.getBlogById(this.blogId).subscribe(data => this.blog = data)
+   this.blogService.getById(this.blogId).subscribe(data => {
+     this.blog = data[0]
+     console.log(this.blog);
+   })
   //  this.blog = this.blogService.getBlogById(this.blogId);
   }
 
   addComment() {
     if(this.blogComment != '') {
       console.log(this.blogComment);
-      this.blogService.addComment(this.blogId,this.blogComment);
-      this.blogComment = '';
+      this.blogService.addComment(this.blogId,this.blogComment).subscribe(data => {
+        console.log(data);
+        this.blogComment = '';
+        this.getBlogById ();
+      });
     }
-    this.getBlogById ();
+    // 
   }
 
 }

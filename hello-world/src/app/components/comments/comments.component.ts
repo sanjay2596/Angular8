@@ -29,14 +29,23 @@ export class CommentsComponent implements OnInit {
 
   replyToComment(){
     if(this.commentReply != '') {
-      this.blogService.addReply(this.commentReply,this.comment);
-      this.commentReply = '';
-      this.getReply = false;
+      this.blogService.addReply(this.commentReply,this.comment).subscribe(data => {
+        console.log(data);
+        
+        this.commentReply = '';
+        this.getReply = false;
+        this.blogService.getById(this.comment.id).subscribe(data => console.log(data[0]));
+
+      });
+
     }
   }
 
   deleteComment(comment) {
-    this.blogService.deleteComment(comment);
+    this.blogService.deleteComment(comment).subscribe(data => {
+      console.log(data);
+      
+    });
     return false;
   }
   editComment() {

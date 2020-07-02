@@ -11,7 +11,6 @@ import { AppLayoutComponent } from './layout/app-layout/app-layout.component';
 import { HeaderComponent } from './layout/header/header.component';
 import { NavbarComponent } from './layout/navbar/navbar.component';
 import { FooterComponent } from './layout/footer/footer.component';
-import { BlogInnerComponent } from './components/blog-inner/blog-inner.component';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { HomeComponent } from './home/home.component';
 import { AddBlogComponent } from './add-blog/add-blog.component';
@@ -26,7 +25,6 @@ import { BlogViewComponent } from './blog-view/blog-view.component';
     HeaderComponent,
     NavbarComponent,
     FooterComponent,
-    BlogInnerComponent,
     HomeComponent,
     AddBlogComponent,
     BlogViewComponent

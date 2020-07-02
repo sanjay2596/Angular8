@@ -5,6 +5,7 @@ import { BlogComment } from '../model/Comment';
 import { CommentReply } from '../model/Reply';
 import { getDateTime } from '../common/functions';
 import { map, catchError } from 'rxjs/operators';
+import { ThrowStmt } from '@angular/compiler';
 
 export interface Blog {
   id:number,
@@ -31,69 +32,116 @@ export class BlogService {
     private http: HttpClient
   ) { }
 
-  // getBlogById(id): Observable<any> {
-  //   return this.http.get(this.baseUrl);
-  // }
+  getAll(): Observable<any[]> {
+    return this.http.get(`${this.baseUrl}/list`).pipe(
+      map((res) => {
+        this.dbBlogs = res['data'];
+        //  this.addBlog('d','w','t')
 
-    getAll(): Observable<any[]> {
-      return this.http.get(`${this.baseUrl}/list`).pipe(
-        map((res) => {
-          this.dbBlogs = res['data'];
-          return this.dbBlogs;
-      }))
-    }
-
-
-    getById(id): Observable<any[]> {
-      return this.http.get(`${this.baseUrl}/get-by-id?ab=${id}`).pipe(
-        map((res) => {
-          this.dbBlogs = res['data'];
-          return this.dbBlogs;
-      }))
-    }
-  getAllBlogs() : Observable<any[]> {
-    return of(JSON.parse(localStorage.getItem('blogs')))
+        return this.dbBlogs;
+    }))
   }
-  getBlogById(id)  {
-    this.blogs  = JSON.parse(localStorage.getItem('blogs'))
-     return of(this.blogs.find(blog => blog.id == id))
-    // return blogs.find(blog => blog.id == id);
+
+
+  getById(id): Observable<any[]> {
+    return this.http.get(`${this.baseUrl}/get-by-id?ab=${id}`).pipe(
+      map((res) => {
+        this.dbBlogs = res['data'];
+        this.dbBlogs[0]['comments'] = [];
+        this.getCommentByBlogId(id).subscribe(data => {
+          this.dbBlogs[0].comments.push(...data);
+          const commentIds = data.map(com => com.id);
+          if(commentIds.length != 0) {
+            // console.log(commentIds.toString());
+            this.getRepliesByCommentId(commentIds).subscribe(replies => {
+              // console.log(replies)
+              for(let i=0; i<this.dbBlogs[0]['comments'].length; i++) {
+                this.dbBlogs[0]['comments'][i]['replies'] = []
+                for(let j=0; j<replies.length; j++) {
+                  if(this.dbBlogs[0]['comments'][i].id == replies[j].comment_id) {
+                    this.dbBlogs[0]['comments'][i]['replies'].push(replies[j])
+                  }
+                }
+              }
+            })
+          }
+        });
+        return this.dbBlogs;
+    }));
+  }
+  private getCommentByBlogId(id): Observable<any[]> {
+    return this.http.get(`${this.baseUrl}/get-comment-by-blog-id?ab=${id}`).pipe(
+      map((res) => {
+        return res['data'];
+    }))
+  }
+  private getRepliesByCommentId(commentIds) : Observable<any[]>{
+    let params = commentIds.toString();
+    return this.http.get(`${this.baseUrl}/get-replies?ab=${params}`).pipe(
+      map((res) => {
+        return res['data'];
+    }))
+  }
+
+  addBlog(title,content,author) : Observable<Object> {
+    let blog = { 
+      heading: title, 
+      content: content, 
+      author : author  , 
+      date: getDateTime(),
+    }
+    return this.http.post(`${this.baseUrl}/add-blog`,{data: blog})
   }
 
   addComment(id,comment) {
-    let currentComment: BlogComment = {
+    let currentComment= {
       text : comment,
       blog_id: id,
       status: 'approved',
       replies: [],
       user_id: 0,
       username: 'karthik',
-      id: Math.floor(Math.random() * (100 - 10 + 1) ) + 10,
-      time: getDateTime()
+      date: getDateTime()
     };
-    this.blogs= JSON.parse(localStorage.getItem('blogs'));
-    this.blogs.find(blog => blog.id == id).comments.push(currentComment);
-    localStorage.setItem("blogs", JSON.stringify(this.blogs))
+    return this.http.post(`${this.baseUrl}/add-comment`,{data: currentComment})
+
   }
   addReply(reply,comment:BlogComment) {
-    let currentReply : CommentReply = {
+    let currentReply = {
       text: reply,
-      id: Math.floor(Math.random() * (3482 - 256 + 1) ) + 256,
       comment_id: comment.id,
-      username: comment.username,
-      user_id: comment.user_id
+      username: 'Anonymous',
+      time: getDateTime(),
+      status: 'approved'
     }
-    this.blogs.find(blog => blog.id == comment.blog_id).comments
-              .find(comment => comment.id == currentReply.comment_id).replies
-              .push(currentReply);
-    localStorage.setItem("blogs", JSON.stringify(this.blogs))
+    // this.blogs.find(blog => blog.id == comment.blog_id).comments
+    //           .find(comment => comment.id == currentReply.comment_id).replies
+    //           .push(currentReply);
+    // localStorage.setItem("blogs", JSON.stringify(this.blogs))
+    return this.http.post(`${this.baseUrl}/add-reply`,{data: currentReply})
+
   }
 
   deleteComment(blogComment:BlogComment) {
-    let latestComments = this.blogs.find(blog => blog.id == blogComment.blog_id).comments
-              .filter(comment => comment.id != blogComment.id);
-    this.blogs.find(blog => blog.id == blogComment.blog_id).comments = latestComments;
-    localStorage.setItem("blogs", JSON.stringify(this.blogs))
+    let info = {
+      table : 'comments',
+      id : blogComment.id
+    }
+    // let latestComments = this.blogs.find(blog => blog.id == blogComment.blog_id).comments
+    //           .filter(comment => comment.id != blogComment.id);
+    // this.blogs.find(blog => blog.id == blogComment.blog_id).comments = latestComments;
+    // localStorage.setItem("blogs", JSON.stringify(this.blogs))
+    return this.http.put(`${this.baseUrl}/delete`,{data: info})
+
+
+  }
+  deleteBlog(blog) {
+    let info = {
+      table : 'blogs',
+      id : blog.id
+    }
+    return this.http.put(`${this.baseUrl}/delete`,{data: info})
+
 
   }
   editComment(originalComment:BlogComment,newComment:string) {
@@ -103,25 +151,25 @@ export class BlogService {
 
   }
 
-  addBlog(title, content, author){
-    let blog : Blog = { 
-      heading: title, 
-      content: content, 
-      author : author  , 
-      id : Math.floor(Math.random() * (100 - 10 + 1) ) + 10,
-      date: getDateTime(),
-      comments: []
-    }
-    if(localStorage.getItem("blogs")){
-      this.blogs = JSON.parse(localStorage.getItem("blogs"))
-      this.blogs.push(blog)
-      localStorage.setItem("blogs", JSON.stringify(this.blogs))
-    } else {
-        let blogs = [];
-        blogs.push(blog);
-        localStorage.setItem("blogs", JSON.stringify(blogs))
-    }
-  }
+  // addBlog(title, content, author){
+  //   let blog : Blog = { 
+  //     heading: title, 
+  //     content: content, 
+  //     author : author  , 
+  //     id : Math.floor(Math.random() * (100 - 10 + 1) ) + 10,
+  //     date: getDateTime(),
+  //     comments: []
+  //   }
+  //   if(localStorage.getItem("blogs")){
+  //     this.blogs = JSON.parse(localStorage.getItem("blogs"))
+  //     this.blogs.push(blog)
+  //     localStorage.setItem("blogs", JSON.stringify(this.blogs))
+  //   } else {
+  //       let blogs = [];
+  //       blogs.push(blog);
+  //       localStorage.setItem("blogs", JSON.stringify(blogs))
+  //   }
+  // }
 
   removeBlog(blog){
     this.blogs = JSON.parse(localStorage.getItem("blogs"))

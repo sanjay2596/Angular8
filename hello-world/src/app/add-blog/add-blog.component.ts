@@ -25,8 +25,11 @@ export class AddBlogComponent implements OnInit {
    
   addBlog(){
     if(this.title && this.content && this.author != '') {
-      this.blogService.addBlog(this.title,this.content,this.author)
-      this.router.navigateByUrl('');
+      this.blogService.addBlog(this.title,this.content,this.author).subscribe(data => {
+        console.log(data);
+        this.router.navigateByUrl('');
+
+      })
     }
   }
 }
