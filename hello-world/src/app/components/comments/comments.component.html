@@ -1,8 +1,8 @@
 <div class="p-3 my-2 border-black" style="border:1px solid black">
     <div class="row">
         <h5 class="col-md-1"><b>{{comment.username}}:&nbsp;</b></h5>
-        <p class="col-md-5">{{comment.text}}</p> 
-        <p class="col-md-3 text-center">{{comment.time}}</p> 
+        <p class="col-md-5">{{comment.comment}}</p> 
+        <p class="col-md-3 text-center">{{comment.posted_on}}</p> 
         <p class="col-md-1"><a href="#" (click)="addReply()">Reply</a></p>
         <p class="col-md-1"><a href="#" (click)="deleteComment(comment)">Delete</a></p>
         <p class="col-md-1"><a href="#" (click)="toggleEdit()">Edit</a></p>
@@ -26,8 +26,8 @@
         <h3>Replies</h3>
         <div *ngFor="let reply of comment.replies">
             <div class="row">
-                <h5 class="col-md-1"><b>{{reply.username}}:&nbsp;</b></h5>
-                <p class="col-md-9">{{reply.text}}</p>
+                <h5 class="col-md-2"><b>{{reply.username}}:&nbsp;</b></h5>
+                <p class="col-md-9">{{reply.reply}}</p>
             </div>
         </div>
     </div>

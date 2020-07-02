@@ -8,7 +8,7 @@ header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Ac
 require 'db.php';
     
 $blogs = [];
-$sql = "SELECT id, content, heading FROM blogs";
+$sql = "SELECT id, content, heading FROM blogs WHERE status = 'published'";
 
 if($result = mysqli_query($con,$sql))
 {
