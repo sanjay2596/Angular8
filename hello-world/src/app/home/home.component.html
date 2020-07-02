@@ -4,10 +4,10 @@
     <div style="padding: 20px 0px;" *ngFor = "let blog  of blogs">
         <div class="card">
             <div class="card-header">
-                {{ blog.title  }}
+                {{ blog.heading  }}
                 <span style="float: right; color:red; cursor:pointer;" (click)="removeBlog(blog)">X</span>
             </div>
-            <div class="card-body" (click)="onSelect(blog)" >
+            <div class="card-body" [routerLink]="['/blog',blog.id]" >
                 <p class="card-text" style="overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;">{{ blog.content }}</p> 
             </div>
         </div>

@@ -12,10 +12,10 @@ import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
 {path:'home', component:AppLayoutComponent},
-{path:'blog/:id',component:BlogInnerComponent},
+// {path:'blog/:id',component:BlogInnerComponent},
 { path:"",component:HomeComponent},
 { path:"add-blog",component:AddBlogComponent},
-{ path:":id", component:BlogViewComponent }
+{ path:"blog/:id", component:BlogViewComponent }
 ];
 
 @NgModule({

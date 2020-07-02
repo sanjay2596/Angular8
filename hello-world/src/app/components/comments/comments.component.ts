@@ -33,7 +33,6 @@ export class CommentsComponent implements OnInit {
       this.commentReply = '';
       this.getReply = false;
     }
-
   }
 
   deleteComment(comment) {

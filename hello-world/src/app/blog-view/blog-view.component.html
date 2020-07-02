@@ -1,8 +1,23 @@
 <div class="container">
-    <h2 class="text-center pb-2">{{blog.title}}</h2>
+    <h2 class="text-center pb-2">{{blog.heading}}</h2>
     <div>
         <h5 style="float:left;"> Author: {{blog.author}}</h5>
         <h5 style="float:right;">{{blog.date | date }}</h5>
     </div>
     <p class="p-5"> {{blog.content}} </p>
+</div>
+<div class="col-md-8 offset-md-2 mt-5 col-sm-12">
+    <h2>Comments</h2>
+    <div class="comments" style="height: 400px;">
+        <div *ngFor = "let comment of blog.comments">
+            <app-comments [comment]="comment"></app-comments>
+        </div>
+    </div>
+    <div class="add-comment mt-5">
+        <h4>Add a comment</h4>
+        <div class="">
+            <textarea [(ngModel)]='blogComment' rows="5" cols="100"></textarea>
+        </div>
+        <button class="btn btn-success" (click)="addComment()">Submit</button>
+    </div>
 </div>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { BlogService } from '../services/blog.service';
 
 
 @Component({
@@ -10,19 +11,28 @@ import { ActivatedRoute } from '@angular/router';
 export class BlogViewComponent implements OnInit {
   public blogId;
   public blog;
-  constructor( private router : ActivatedRoute) { }
+  public blogComment:string = '' ;
+  constructor( private router : ActivatedRoute,
+    private blogService: BlogService) { }
 
   ngOnInit() {
     this.router.paramMap.subscribe(param => { this.blogId = param.get('id');
-    
   })
   this.getBlogById ()
   }
+
   getBlogById (){
-   let  blogs  = JSON.parse(localStorage.getItem('blogs'))
-   this.blog = blogs.find(blog => blog.id == this.blogId)
-   console.log(blogs)
-   console.log(this.blog)
+   this.blogService.getBlogById(this.blogId).subscribe(data => this.blog = data)
+  //  this.blog = this.blogService.getBlogById(this.blogId);
+  }
+
+  addComment() {
+    if(this.blogComment != '') {
+      console.log(this.blogComment);
+      this.blogService.addComment(this.blogId,this.blogComment);
+      this.blogComment = '';
+    }
+    this.getBlogById ();
   }
 
 }
