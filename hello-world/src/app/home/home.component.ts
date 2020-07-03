@@ -13,19 +13,21 @@ export class HomeComponent implements OnInit {
   blogs = []
   ngOnInit() {
     this.getAllBlogs()
-    this.blogService.getById(2).subscribe(data => console.log(data));
+    // this.blogService.getById(3).subscribe(data => console.log(data));
     
   }
   getAllBlogs() {
-    this.blogService.getAllBlogs().subscribe(data => this.blogs = data)
+    this.blogService.getAll().subscribe(data => this.blogs = data)
   }
   removeBlog(blog){
     // let index = this.blogs.indexOf(blog)
     // this.blogs.splice(index, 1)
     // localStorage.setItem("blogs", JSON.stringify(this.blogs))
-    this.blogService.removeBlog(blog)
-    alert("blog has been Deleted")
-    this.getAllBlogs()
+    this.blogService.deleteBlog(blog).subscribe(data => {
+      alert("blog has been Deleted")
+      this.getAllBlogs()
+    })
+
 
   }
 
