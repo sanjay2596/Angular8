@@ -9,7 +9,10 @@ import { BlogService } from '../services/blog.service';
 })
 export class HomeComponent implements OnInit {
 
-  constructor( private blogService: BlogService )  { }
+  constructor( 
+    private blogService: BlogService,     
+    private router: Router
+    )  { }
   blogs = []
   ngOnInit() {
     this.getAllBlogs()
@@ -29,6 +32,14 @@ export class HomeComponent implements OnInit {
     })
 
 
+  }
+
+  addUser(){
+    this.router.navigateByUrl('/addUser');
+  }
+
+  viewUsers(){
+    this.router.navigateByUrl('/users');
   }
 
 }

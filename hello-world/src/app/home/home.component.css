@@ -1,0 +1,10 @@
+.view-blog{
+    display: flex
+}
+.user-buttons {
+    float: right;
+}
+
+.user-buttons .button-1 {
+    margin-right: 15px;
+}

@@ -28,6 +28,7 @@ export class BlogService {
 
   public baseUrl = 'http://localhost/api';
   dbBlogs
+  users
   constructor(
     private http: HttpClient
   ) { }
@@ -42,6 +43,13 @@ export class BlogService {
     }))
   }
 
+  getUsers(): Observable<any[]> {
+    return this.http.get(`${this.baseUrl}/users`).pipe(
+      map((res) => {
+        this.users = res['data'];
+        return this.users;
+    }))
+  }
 
   getById(id): Observable<any[]> {
     return this.http.get(`${this.baseUrl}/get-by-id?ab=${id}`).pipe(
@@ -91,6 +99,25 @@ export class BlogService {
       date: getDateTime(),
     }
     return this.http.post(`${this.baseUrl}/add-blog`,{data: blog})
+  }
+
+  addUser(name,password,role,status) : Observable<Object> {
+    let user = { 
+      username: name, 
+      password: password, 
+      role : role  , 
+      status: status,
+    }
+    return this.http.post(`${this.baseUrl}/add-user`,{data: user})
+  }
+
+  userLogin(uname,password) : Observable<Object> {
+    let user = { 
+      uname: uname, 
+      password: password,
+    }
+    console.log(user);
+    return this.http.post(`${this.baseUrl}/get-user`,{data: user})
   }
 
   addComment(id,comment) {

@@ -1,0 +1,13 @@
+<div style="padding: 20px 0px;">
+    <table>
+        <tr>
+          <th>Name</th>
+          <th>Role</th>
+          <th>Status</th>
+        </tr>
+        <tr *ngFor = "let user  of users">
+          <td>{{user.username}}</td>
+          <td>{{user.role}}</td>
+        </tr>
+      </table>
+</div>
