@@ -12,6 +12,7 @@ export class AddBlogComponent implements OnInit {
   public title:string = '';
   public content:string = '';
   public author:string = '';
+  public featuredImage:string = '';
   constructor(
     private blogService: BlogService,
     private router: Router,
@@ -22,11 +23,21 @@ export class AddBlogComponent implements OnInit {
   ngOnInit() {
 
   }
-   
+  uploadImage(event){
+    if (event.target.files && event.target.files[0]) {
+      var reader = new FileReader();
+
+      reader.readAsDataURL(event.target.files[0]); // read file as data url
+
+      reader.onload = (event) => { // called once readAsDataURL is completed
+        let url = event.target.result;
+        console.log(url);
+      }
+    }
+  }
   addBlog(){
-    if(this.title && this.content && this.author != '') {
-      this.blogService.addBlog(this.title,this.content,this.author).subscribe(data => {
-        console.log(data);
+    if(this.title && this.content && this.author && this.featuredImage != '') {
+      this.blogService.addBlog(this.title,this.content,this.author,this.featuredImage).subscribe(data => {
         this.router.navigateByUrl('');
 
       })

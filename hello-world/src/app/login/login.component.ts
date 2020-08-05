@@ -23,10 +23,9 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     if ( this.uname && this.password != '' ){
       this.blogService.userLogin(this.uname,this.password).subscribe(data => {
-        console.log(data['data']);
-        if(data['data'].length != 0) {
-          this.role = data['data'][0].role;
-          console.log(this.role);
+        if(data != null ) {
+          // this.role = data['data'][0].role;
+          // console.log(this.role);
           this.router.navigateByUrl('/blog');
         } else {
           console.log('login failed')

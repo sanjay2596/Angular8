@@ -5,6 +5,8 @@ CREATE TABLE `blogs` (
   `content` text NOT NULL,
   `author_id` int(11) DEFAULT NULL,
   `author` varchar(50) DEFAULT NULL,
+  `date` varchar(50) DEFAULT NULL,
+  `featured_image` BLOB DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8
 

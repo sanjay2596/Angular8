@@ -13,7 +13,8 @@ export interface Blog {
   content: string,
   comments: BlogComment[],
   author: string,
-  date: string
+  date: string,
+  featuredImage: string
 }
 @Injectable({
   providedIn: 'root'
@@ -26,7 +27,7 @@ export class BlogService {
 
   public comments : BlogComment[];
 
-  public baseUrl = 'http://localhost/api';
+  public baseUrl = 'http://localhost:3000';
   dbBlogs
   users
   constructor(
@@ -91,12 +92,13 @@ export class BlogService {
     }))
   }
 
-  addBlog(title,content,author) : Observable<Object> {
+  addBlog(title,content,author,featuredImage) : Observable<Object> {
     let blog = { 
       heading: title, 
       content: content, 
       author : author  , 
       date: getDateTime(),
+      featured_image : featuredImage
     }
     return this.http.post(`${this.baseUrl}/add-blog`,{data: blog})
   }
@@ -113,11 +115,10 @@ export class BlogService {
 
   userLogin(uname,password) : Observable<Object> {
     let user = { 
-      uname: uname, 
+      username: uname, 
       password: password,
     }
-    console.log(user);
-    return this.http.post(`${this.baseUrl}/get-user`,{data: user})
+    return this.http.post(`${this.baseUrl}/signin`,user)
   }
 
   addComment(id,comment) {
